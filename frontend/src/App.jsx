@@ -1,7 +1,7 @@
 
 import './App.css'
 import Home from './components/Home/Home';
-import { Login } from './components/Login/Login'
+import  Login  from './components/Login/Login'
 import { Registro } from './components/Registro/Registro.jsx'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function parseJwt (token) {

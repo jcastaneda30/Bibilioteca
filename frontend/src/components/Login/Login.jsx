@@ -1,20 +1,20 @@
-import { useState } from "react";
 import "./Login.css";
+import Home from "../Home/Home.jsx";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Home from "../Home/Home";
 
-export function Login() {
-  const [username, setUsername] = useState("");
+const Login = () => {
   const [password, setPassword] = useState("");
-  const [loginSuccessful, setloginSuccessful] = useState(false);
+  const [username, setUsername] = useState("");
+  const [loginSuccessful, setLoginSuccessful] = useState(false);
 
-  const handleLogin = async (e) => {
+  const handdleLogin = (e) => {
     e.preventDefault();
     const data = {
       username: username,
       password: password,
     };
-    await fetch("http://localhost:3000/login", {
+    fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,16 +23,16 @@ export function Login() {
     })
       .then((response) => response.json())
       .then((result) => {
+        console.log(result.token);
         if (result.token) {
           localStorage.setItem("token", result.token);
-          setloginSuccessful(true);
+          setLoginSuccessful(true);
         } else {
-          if (!result.success) alert("Contraseña o usuario incorrecto");
-          setloginSuccessful(false);
+          setLoginSuccessful(false);
         }
       })
-      .catch((erro) => {
-        console.log(erro);
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -41,31 +41,35 @@ export function Login() {
       {loginSuccessful ? (
         <Home />
       ) : (
-        <div>
+        <div className="custom-form">
           <form>
-            <label htmlFor="Username">Username </label>
+            <label className="custom-label">Username:</label>
             <input
-              type="text"
-              id="Username"
               onChange={(event) => {
                 setUsername(event.target.value);
               }}
+              placeholder="username"
+              className="custom-input"
+              type="text"
             />
-            <label htmlFor="Password">Password </label>
+            <label className="custom-label">Password:</label>
             <input
+              onChange={(event) => setPassword(event.target.value)}
+              placeholder="password"
+              className="custom-input"
               type="password"
-              id="Password"
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
             />
             <div>
-              <Link to="/register">¿No tienes cuenta? Regístrate aquí</Link>
+              <Link to="/">¿Ya tienes cuenta? Ingresa aquí</Link>
             </div>
-            <button onClick={handleLogin}>Login</button>
+            <button className="custom-button" onClick={handdleLogin}>
+              Login
+            </button>
           </form>
         </div>
       )}
     </>
   );
-}
+};
+
+export default Login;
