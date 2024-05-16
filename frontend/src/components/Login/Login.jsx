@@ -23,7 +23,7 @@ const Login = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log(result.token);
+        console.log(result);
         if (result.token) {
           localStorage.setItem("token", result.token);
           setLoginSuccessful(true);

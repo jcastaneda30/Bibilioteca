@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate,Link } from 'react-router-dom';
 
 import "./Registro.css";
 export function Registro() {
@@ -20,7 +19,6 @@ export function Registro() {
       })
       .then((response) => {
         // Manejar la respuesta exitosa
-        console.log("Respuesta:", response);
         if(response.status==200){
           alert('Cuenta creada exitosamente')
           navigate("/")

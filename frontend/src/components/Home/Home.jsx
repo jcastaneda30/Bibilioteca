@@ -1,6 +1,7 @@
+import NavBar from "../NavBar/NavBar";
 const Home = ()=>{
     return(
-        <div>Monda</div>
+        <NavBar />
     )
 }
 
